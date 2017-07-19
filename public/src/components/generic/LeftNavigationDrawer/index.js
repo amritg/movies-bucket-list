@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const LeftNavigationDrawer = (props) => 
   <Drawer
     open={props.open}
-    containerStyle={{top: '65px', left:'auto'}}
+    containerStyle={{top: '64px', left:'auto'}}
   >
     <Link to='/'><MenuItem>Now Playing</MenuItem></Link>
     <Link to='/upcoming'><MenuItem>Upcoming</MenuItem></Link>

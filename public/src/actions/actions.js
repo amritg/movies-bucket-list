@@ -5,12 +5,15 @@ import fetch from 'isomorphic-fetch'
 
 export const REQUEST_NOW_PLAYING = 'REQUEST_NOW_PLAYING'
 export const RECEIVE_NOW_PLAYING = 'RECEIVE_NOW_PLAYING'
+
 export const REQUEST_UPCOMING = 'REQUEST_UPCOMING'
 export const RECEIVE_UPCOMING = 'RECEIVE_UPCOMING'
+
 export const REQUEST_POPULAR = 'REQUEST_POPULAR'
 export const RECEIVE_POPULAR = 'RECEIVE_POPULAR'
 
-export const SET_CARD_WIDTH = 'SET_CARD_WIDTH'
+export const REQUEST_SEARCH = 'REQUEST_SEARCH'
+export const RECEIVE_SEARCH = 'RECEIVE_SEARCH'
 
 /**
  * Action Creators
@@ -54,17 +57,23 @@ export const receivePopular = (movies) => {
   }
 }
 
-export const setCardWidth = (cardWidth) => {
+export const requestSearch = () => {
   return {
-    type: SET_CARD_WIDTH,
-    cardWidth: cardWidth
+    type: REQUEST_SEARCH
+  }
+}
+
+export const receiveSearch = (searchResults) => {
+  return {
+    type: RECEIVE_SEARCH,
+    searchResults: searchResults
   }
 }
 
 export const fetchNowPlaying = () => {
   return (dispatch) => {
     dispatch(requestNowPlaying())
-    return fetch('/apitmdb/3/movie/now_playing?api_key=cec3df6eb60f82c18b233d13518045e9&language=en-US&page=1')
+    return fetch('/apitmdb/3/movie/now_playing?api_key=cec3df6eb60f82c18b233d13518045e9&region=FI')
       .then(response=> response.json())
       .then(nowPlaying => dispatch(receiveNowPlaying(nowPlaying.results)))
   }
@@ -73,7 +82,7 @@ export const fetchNowPlaying = () => {
 export const fetchUpcoming = () => {
   return (dispatch) => {
     dispatch(requestUpcoming())
-    return fetch('/apitmdb/3/movie/upcoming?api_key=cec3df6eb60f82c18b233d13518045e9&language=en-US&page=1')
+    return fetch('/apitmdb/3/movie/upcoming?api_key=cec3df6eb60f82c18b233d13518045e9&region=FI')
       .then(response => response.json())
       .then(upcoming => dispatch(receiveUpcoming(upcoming.results)))
   }
@@ -82,8 +91,17 @@ export const fetchUpcoming = () => {
 export const fetchPopular = () => {
   return (dispatch) => {
     dispatch(requestPopular())
-    return fetch('/apitmdb/3/movie/popular?api_key=cec3df6eb60f82c18b233d13518045e9&language=en-US&page=1')
+    return fetch('/apitmdb/3/movie/popular?api_key=cec3df6eb60f82c18b233d13518045e9&region=FI')
       .then(response => response.json())
       .then(popular => dispatch(receivePopular(popular.results)))
+  }
+}
+
+export const fetchSearch = (item) => {
+  return (dispatch) => {
+    dispatch(requestSearch())
+    return fetch(`/apitmdb/3/search/multi?api_key=cec3df6eb60f82c18b233d13518045e9&r&language=en-US&query=${item}`)
+      .then(response => response.json())
+      .then(searchReasults => dispatch(receiveSearch(searchReasults.results)))
   }
 }

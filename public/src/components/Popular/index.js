@@ -1,52 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card'
+import { Container, Col, Row } from 'react-grid-system'
 
-const giveSize = (size) => {
-  switch (size) {
-  case 'wide': return '20%'
-  case 'desktop': return '25%'
-  case 'tablet': return '33%'
-  default: return '50%'
-  }
-}
+import MovieCard from '../generic/MovieCard'
 
-const MovieCard = ({ movies, cardWidth, isFetching }) => {
+const Popular = ({ movies, isFetching }) => {
   const moviesList = movies.map((movie, index) => {
     return (
-      <div key={index} style={{width: giveSize(cardWidth) }}>
-        <Card>
-          <CardMedia
-          >
-            <img src={'https://image.tmdb.org/t/p/w300/' + movie.poster_path} />
-          </CardMedia>
-          <CardTitle title={movie.title}/>
-          <CardText>
-            {movie.overview}
-          </CardText>
-        </Card>
-      </div>
+      <Col xs={12} md={6} className={'movie-card'} key={index}>
+        <MovieCard movie={movie} />
+      </Col>
     )
   })
   return (
     isFetching 
       ? <p>Loading ...</p> 
-      : <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
-        {moviesList}
-      </div>
+      : <Container className={'body'}>
+        <Row>
+          {moviesList}
+        </Row>
+      </Container>
   )
 }
 
 const mapStateToProps = state => {
   return {
     isFetching: state.popular.isFetching,
-    movies: state.popular.movies,
-    cardWidth: state.cardWidth
+    movies: state.popular.movies
   }
 }
 
-const Popular = connect(
+export default connect(
   mapStateToProps
-)(MovieCard)
+)(Popular)
 
-export default Popular

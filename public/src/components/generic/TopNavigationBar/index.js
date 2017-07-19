@@ -3,7 +3,7 @@ import { AppBar } from 'material-ui'
 
 const TopNavigationBar = (props) =>
   <AppBar
-    title='Movies Bucketlist'
+    title={'Movies Bucketlist'}
     onLeftIconButtonTouchTap={props.toggleLeftNavigationDrawer}
   />
 
