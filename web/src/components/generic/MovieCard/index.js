@@ -3,10 +3,13 @@ import { Row, Col } from 'react-grid-system'
 import RaisedButton from 'material-ui/RaisedButton'
 import EditorFormatListBulleted from 'material-ui/svg-icons/editor/format-list-bulleted'
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
+import { fetchMovieDetails } from '../../../actions/actions'
 require('./style.css')
 
-const MovieCard = ({ movie }) => {
+const MovieCard = withRouter(({ movie, fetchMovieDetails, history }) => {
   const croppedMovieOverview = movie.overview.length > 200 ? movie.overview.substring(0, 200) + ' ....' : movie.overview
   
   return (
@@ -22,6 +25,10 @@ const MovieCard = ({ movie }) => {
           labelPosition="after"
           primary={true}
           icon={<EditorFormatListBulleted />}
+          onTouchTap={() => {
+            fetchMovieDetails(movie.id)
+            history.push('/moviedetails/' + movie.id)
+          }}
         />
         <RaisedButton 
           label="Bucket"
@@ -32,6 +39,21 @@ const MovieCard = ({ movie }) => {
       </Col>
     </Row>
   )
+})
+
+const mapStateToProps = (state) => {
+  return {
+    state
+  } 
 }
 
-export default MovieCard
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchMovieDetails: (movieId) => dispatch(fetchMovieDetails(movieId))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieCard)

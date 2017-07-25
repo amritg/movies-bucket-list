@@ -7,7 +7,7 @@ const LeftNavigationDrawer = (props) =>
     open={props.open}
     containerStyle={{top: '64px', left:'auto'}}
   >
-    <Link to='/'><MenuItem>Now Playing</MenuItem></Link>
+    <Link to='/nowplaying'><MenuItem>Now Playing</MenuItem></Link>
     <Link to='/upcoming'><MenuItem>Upcoming</MenuItem></Link>
     <Link to='/popular'><MenuItem>Popular</MenuItem></Link>
     <Link to='/mybucketlist'><MenuItem>My Bucket List</MenuItem></Link>

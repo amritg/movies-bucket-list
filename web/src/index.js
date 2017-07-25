@@ -6,8 +6,9 @@ import { MuiThemeProvider } from 'material-ui/styles'
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { Container } from 'react-grid-system' 
+import { Container } from 'react-grid-system'
 
+import Main from './components/Main'
 import LeftNavigationDrawer from './components/generic/LeftNavigationDrawer'
 import NowPlaying from './components/NowPlaying'
 import MyBucketlist from './components/MyBucketlist'
@@ -17,16 +18,12 @@ import Popular from './components/Popular'
 import SearchBar from './components/generic/SearchBar'
 import MovieDetails from './components/MovieDetails'
 
-import { fetchNowPlaying, fetchUpcoming, fetchPopular } from './actions/actions'
-import rootReducer from './reducers/rootReducer'
+import RootReducer from './reducers/RootReducer'
 
 injectTapEventPlugin()
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+const store = createStore(RootReducer, applyMiddleware(thunkMiddleware))
 
-store.dispatch(fetchNowPlaying())
-store.dispatch(fetchUpcoming())
-store.dispatch(fetchPopular())
 class MainContainer  extends React.Component {
   constructor(props) {
     super(props)
@@ -51,9 +48,10 @@ class MainContainer  extends React.Component {
             />
             <LeftNavigationDrawer open={this.state.openLeftNavigationDrawer} />
             <Container>
-              <SearchBar />
+              <SearchBar />             
               <div>
-                <Route exact path='/' component={NowPlaying}/>
+                <Route exact path='/' component={Main}/>
+                <Route path='/nowplaying' component={NowPlaying}/>
                 <Route path='/mybucketlist' component={MyBucketlist}/>
                 <Route path='/upcoming' component={Upcoming}/>
                 <Route path='/popular' component={Popular}/>

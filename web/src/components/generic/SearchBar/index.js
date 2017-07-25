@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import MenuItem from 'material-ui/MenuItem'
 import { withRouter } from 'react-router-dom'
 
-import { fetchSearch } from '../../../actions/actions'
+import { fetchSearch, fetchMovieDetails} from '../../../actions/actions'
 
-const SearchBar = withRouter(({fetchSearch, searchResults, history}) => {
+const SearchBar = withRouter(({fetchSearch, searchResults, history, fetchMovieDetails}) => {
   const moviesList = searchResults.map((movie) => ({
     text: movie.title || movie.name,
     movie: movie,
@@ -27,8 +27,8 @@ const SearchBar = withRouter(({fetchSearch, searchResults, history}) => {
       fullWidth={true}
       filter={AutoComplete.noFilter}
       onNewRequest={
-        (chosenRequest, index) => {
-          console.log(chosenRequest, index)
+        (chosenRequest) => {
+          fetchMovieDetails(chosenRequest.movie.id)
           history.push('/moviedetails/' + chosenRequest.movie.id)
         }
       }
@@ -43,7 +43,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchSearch:  (text) => { dispatch(fetchSearch(text)) }
+    fetchSearch:  (text) => { dispatch(fetchSearch(text)) },
+    fetchMovieDetails: (movieId) => { dispatch(fetchMovieDetails(movieId)) }
   }
 }
 

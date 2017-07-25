@@ -15,6 +15,9 @@ export const RECEIVE_POPULAR = 'RECEIVE_POPULAR'
 export const REQUEST_SEARCH = 'REQUEST_SEARCH'
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH'
 
+export const REQUEST_MOVIE_DETAILS = 'REQUEST_MOVIE_DETAILS'
+export const RECEIVE_MOVIE_DETAILS = 'RECIVE_MOVIE_DETAILS'
+
 /**
  * Action Creators
  */
@@ -70,6 +73,19 @@ export const receiveSearch = (searchResults) => {
   }
 }
 
+export const requestMoiveDetails = () => {
+  return {
+    type: REQUEST_MOVIE_DETAILS
+  }
+}
+
+export const receiveMovieDetails = (movie) => {
+  return {
+    type: RECEIVE_MOVIE_DETAILS,
+    movie: movie
+  }
+}
+
 export const fetchNowPlaying = () => {
   return (dispatch) => {
     dispatch(requestNowPlaying())
@@ -103,5 +119,14 @@ export const fetchSearch = (item) => {
     return fetch(`/apitmdb/3/search/multi?api_key=cec3df6eb60f82c18b233d13518045e9&r&language=en-US&query=${item}`)
       .then(response => response.json())
       .then(searchReasults => dispatch(receiveSearch(searchReasults.results)))
+  }
+}
+
+export const fetchMovieDetails = (movieId) => {
+  return (dispatch) => {
+    dispatch(requestMoiveDetails())
+    return fetch(`/apitmdb/3/movie/${movieId}?language=en-US&api_key=cec3df6eb60f82c18b233d13518045e9`)
+      .then(response =>  response.json())
+      .then(movie => dispatch(receiveMovieDetails(movie)))
   }
 }
