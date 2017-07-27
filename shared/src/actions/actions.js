@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch'
 /**
  * Action Types
  */
@@ -17,6 +16,10 @@ export const RECEIVE_SEARCH = 'RECEIVE_SEARCH'
 
 export const REQUEST_MOVIE_DETAILS = 'REQUEST_MOVIE_DETAILS'
 export const RECEIVE_MOVIE_DETAILS = 'RECIVE_MOVIE_DETAILS'
+
+let baseUrl = '/apitmdb'
+
+export const setBaseUrl = (url = '/apitmdb') => baseUrl = url
 
 /**
  * Action Creators
@@ -89,7 +92,7 @@ export const receiveMovieDetails = (movie) => {
 export const fetchNowPlaying = () => {
   return (dispatch) => {
     dispatch(requestNowPlaying())
-    return fetch('/apitmdb/3/movie/now_playing?api_key=cec3df6eb60f82c18b233d13518045e9&region=FI')
+    return fetch(`${baseUrl}/3/movie/now_playing?api_key=cec3df6eb60f82c18b233d13518045e9&region=FI`)
       .then(response=> response.json())
       .then(nowPlaying => dispatch(receiveNowPlaying(nowPlaying.results)))
   }
@@ -98,7 +101,7 @@ export const fetchNowPlaying = () => {
 export const fetchUpcoming = () => {
   return (dispatch) => {
     dispatch(requestUpcoming())
-    return fetch('/apitmdb/3/movie/upcoming?api_key=cec3df6eb60f82c18b233d13518045e9&region=FI')
+    return fetch(`${baseUrl}/3/movie/upcoming?api_key=cec3df6eb60f82c18b233d13518045e9&region=FI`)
       .then(response => response.json())
       .then(upcoming => dispatch(receiveUpcoming(upcoming.results)))
   }
@@ -107,7 +110,7 @@ export const fetchUpcoming = () => {
 export const fetchPopular = () => {
   return (dispatch) => {
     dispatch(requestPopular())
-    return fetch('/apitmdb/3/movie/popular?api_key=cec3df6eb60f82c18b233d13518045e9&region=FI')
+    return fetch(`${baseUrl}/3/movie/popular?api_key=cec3df6eb60f82c18b233d13518045e9&region=FI`)
       .then(response => response.json())
       .then(popular => dispatch(receivePopular(popular.results)))
   }
