@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import MenuItem from 'material-ui/MenuItem'
 import { withRouter } from 'react-router-dom'
 
-import { fetchSearch, fetchMovieDetails} from '../../../actions/actions'
+import { fetchSearch, fetchMovieDetails} from '@amrit.gautam/reducers/lib/actions/actions'
 
 const SearchBar = withRouter(({fetchSearch, searchResults, history, fetchMovieDetails}) => {
   const moviesList = searchResults.map((movie) => ({

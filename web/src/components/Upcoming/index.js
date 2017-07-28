@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Container, Col, Row } from 'react-grid-system'
 
 import MovieCard from '../generic/MovieCard'
-import { fetchUpcoming } from '../../actions/actions'
+import { fetchUpcoming } from '@amrit.gautam/reducers/lib/actions/actions'
 class Upcoming extends React.Component {
   
   componentDidMount() {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Container, Col, Row } from 'react-grid-system'
 
 import MovieCard from '../generic/MovieCard'
-import { fetchPopular } from '../../actions/actions'
+import { fetchPopular } from '@amrit.gautam/reducers/lib/actions/actions'
 class Popular extends React.Component {
 
   componentDidMount() {

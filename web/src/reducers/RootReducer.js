@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import { search } from './search'
-import { movieDetails } from './movieDetails'
-import { MoviesReducer } from './MoviesReducer'
+import { search } from '@amrit.gautam/reducers/lib/reducers/search'
+import { movieDetails } from '@amrit.gautam/reducers/lib/reducers/movieDetails'
+import { MoviesReducer } from '@amrit.gautam/reducers/lib/reducers/MoviesReducer'
 
 const RootReducer = combineReducers({
   search,

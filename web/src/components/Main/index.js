@@ -4,7 +4,7 @@ import NowPlaying from '../NowPlaying'
 class Main extends React.Component {
   constructor(props) {
     super(props)
-    console.log('this(insideConstructor)', this)
+    // console.log('this(insideConstructor)', this)
     this.state = {
       activeTab: 'movies'
     }

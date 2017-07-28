@@ -6,7 +6,8 @@ import ContentAddCircle from 'material-ui/svg-icons/content/add-circle'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { fetchMovieDetails } from '../../../actions/actions'
+import { fetchMovieDetails } from '@amrit.gautam/reducers/lib/actions/actions'
+
 require('./style.css')
 
 const MovieCard = withRouter(({ movie, fetchMovieDetails, history }) => {

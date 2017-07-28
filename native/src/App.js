@@ -21,8 +21,8 @@ import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 
-import { fetchNowPlaying, setBaseUrl } from '@amrit.gautam/reducers/lib/actions/actions'
-import { MoviesReducer } from '@amrit.gautam/reducers/lib/reducers/MoviesReducer'
+import { fetchNowPlaying, setBaseUrl } from '@amrit.gautam/reducers/src/actions/actions'
+import { MoviesReducer } from '@amrit.gautam/reducers/src/reducers/MoviesReducer'
 import Root from './Root'
 
 const store = createStore(MoviesReducer, applyMiddleware(thunkMiddleware))

@@ -4,7 +4,7 @@ import {
   Text
 } from 'react-native'
 
-import { fetchNowPlaying, fetchPopular } from '@amrit.gautam/reducers/lib/actions/actions'
+import { fetchNowPlaying, fetchPopular } from '@amrit.gautam/reducers/src/actions/actions'
 import { connect } from 'react-redux'
 
 
@@ -14,8 +14,7 @@ class Root extends Component {
   }
 
   componentDidMount() {
-     // this.props.fetchNowPlaying()
-     this.props.fetchPopular()
+     this.props.fetchNowPlaying()
   }
 
   render() {

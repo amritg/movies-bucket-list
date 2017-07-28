@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Container, Col, Row } from 'react-grid-system'
 
 import MovieCard from '../generic/MovieCard'
-import { fetchNowPlaying } from '../../actions/actions'
+import { fetchNowPlaying } from '@amrit.gautam/reducers/lib/actions/actions'
 
 require('./style.css')
 
