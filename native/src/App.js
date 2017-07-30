@@ -6,26 +6,21 @@ import {
 } from 'react-native';
 
 import { 
-  Container,
-  Header,
-  Content,
-  Title,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon
+  Container
 } from 'native-base'
 
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 
-import { fetchNowPlaying, setBaseUrl } from '@amrit.gautam/reducers/src/actions/actions'
-import { MoviesReducer } from '@amrit.gautam/reducers/src/reducers/MoviesReducer'
-import Root from './Root'
+import { setBaseUrl } from '@amrit.gautam/reducers/src/actions/actions'
+import { RootReducer } from '@amrit.gautam/reducers/src/reducers/RootReducer'
 
-const store = createStore(MoviesReducer, applyMiddleware(thunkMiddleware))
+import NowPlaying from './components/NowPlaying'
+import NavigationBar from './components/NavigationBar'
+import LeftNavigationDrawer from './components/LeftNavigationDrawer'
+
+const store = createStore(RootReducer, applyMiddleware(thunkMiddleware))
 
 setBaseUrl('https://api.themoviedb.org')
 
@@ -34,24 +29,10 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Container>
-          <Header style={{backgroundColor: '#00BCD4'}} iosBarStyle={'light-content'}>
-            <Left style={{flex: 1}}>
-              <Button
-                transparent
-              >
-                <Icon name={'menu'} ios={'ios-menu'} android={'md-menu'} style={{color: 'white'}}></Icon>
-              </Button>
-            </Left>
-            <Body style={{flex: 2}}>
-              <Title style={{color: 'white'}}>Movies Bucket List</Title>
-            </Body>
-            <Right style={{flex: 1}}>
-              <Button transparent>
-                <Icon name='search' style={{color: 'white'}}></Icon>
-              </Button>
-            </Right>
-          </Header>
-          <Root />
+          <NavigationBar />
+          <LeftNavigationDrawer >
+            <NowPlaying />
+          </LeftNavigationDrawer>
         </Container>
       </Provider>
     );

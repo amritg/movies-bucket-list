@@ -17,6 +17,8 @@ export const RECEIVE_SEARCH = 'RECEIVE_SEARCH'
 export const REQUEST_MOVIE_DETAILS = 'REQUEST_MOVIE_DETAILS'
 export const RECEIVE_MOVIE_DETAILS = 'RECIVE_MOVIE_DETAILS'
 
+export const TOGGLE_LEFT_NAVIGATION_DRAWER = 'TOGGLE_LEFT_NAVIGATION_DRAWER'
+
 let baseUrl = '/apitmdb'
 
 export const setBaseUrl = (url = '/apitmdb') => baseUrl = url
@@ -88,6 +90,16 @@ export const receiveMovieDetails = (movie) => {
     movie: movie
   }
 }
+
+export const toggleLeftNavigationDrawer = () => {
+  return {
+    type: TOGGLE_LEFT_NAVIGATION_DRAWER
+  }
+}
+
+  /**
+   * Async API Calls
+   */
 
 export const fetchNowPlaying = () => {
   return (dispatch) => {

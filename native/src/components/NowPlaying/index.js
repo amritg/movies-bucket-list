@@ -7,8 +7,7 @@ import {
 import { fetchNowPlaying, fetchPopular } from '@amrit.gautam/reducers/src/actions/actions'
 import { connect } from 'react-redux'
 
-
-class Root extends Component {
+class NowPlaying extends Component {
   constructor(props) {
     super(props)
   }
@@ -30,10 +29,9 @@ class Root extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
-    isFetching: state.isFetching,
-    movies: state.nowPlayingMovies
+    isFetching: state.moviesStore.isFetching,
+    movies: state.moviesStore.nowPlayingMovies
   }
 }
 
@@ -47,4 +45,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Root)
+)(NowPlaying)

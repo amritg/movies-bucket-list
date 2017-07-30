@@ -18,51 +18,34 @@ import Popular from './components/Popular'
 import SearchBar from './components/generic/SearchBar'
 import MovieDetails from './components/MovieDetails'
 
-import RootReducer from './reducers/RootReducer'
+import { RootReducer } from '@amrit.gautam/reducers/lib/reducers/RootReducer'
 
 injectTapEventPlugin()
 
 const store = createStore(RootReducer, applyMiddleware(thunkMiddleware))
 
-class MainContainer  extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      openLeftNavigationDrawer: false
-    }
-  }
-
-  toggleLeftNavigationDrawer() {
-    this.setState({
-      openLeftNavigationDrawer: !this.state.openLeftNavigationDrawer
-    })
-  }
-
-  render() {
-    return (
-      <Provider store={store}>
-        <Router historty={browserHistory}>
-          <div>
-            <TopNavigationBar 
-              toggleLeftNavigationDrawer={this.toggleLeftNavigationDrawer.bind(this)}
-            />
-            <LeftNavigationDrawer open={this.state.openLeftNavigationDrawer} />
-            <Container>
-              <SearchBar />             
-              <div>
-                <Route exact path='/' component={Main}/>
-                <Route path='/nowplaying' component={NowPlaying}/>
-                <Route path='/mybucketlist' component={MyBucketlist}/>
-                <Route path='/upcoming' component={Upcoming}/>
-                <Route path='/popular' component={Popular}/>
-                <Route path='/moviedetails/:id' component={MovieDetails}/>
-              </div>
-            </Container>
-          </div>
-        </Router>
-      </Provider>
-    )
-  }
+const MainContainer = () => {
+  return (
+    <Provider store={store}>
+      <Router historty={browserHistory}>
+        <div>
+          <TopNavigationBar />
+          <LeftNavigationDrawer />
+          <Container>
+            <SearchBar />             
+            <div>
+              <Route exact path='/' component={Main}/>
+              <Route path='/nowplaying' component={NowPlaying}/>
+              <Route path='/mybucketlist' component={MyBucketlist}/>
+              <Route path='/upcoming' component={Upcoming}/>
+              <Route path='/popular' component={Popular}/>
+              <Route path='/moviedetails/:id' component={MovieDetails}/>
+            </div>
+          </Container>
+        </div>
+      </Router>
+    </Provider>
+  )
 }
 
 const App = () => {
