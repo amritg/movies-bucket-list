@@ -6,18 +6,18 @@ import {
 import {
   Spinner
 } from 'native-base'
-import { fetchNowPlaying, fetchPopular } from '@amrit.gautam/reducers/src/actions/actions'
+import { fetchPopular } from '@amrit.gautam/reducers/src/actions/actions'
 import { connect } from 'react-redux'
 
 import MovieCard from '../generic/MovieCard'
 
-class NowPlaying extends Component {
+class Popular extends Component {
   constructor(props) {
     super(props)
   }
 
   componentDidMount() {
-    this.props.fetchNowPlaying()
+    this.props.fetchPopular()
   }
 
   render() {
@@ -32,13 +32,12 @@ class NowPlaying extends Component {
 const mapStateToProps = (state) => {
   return {
     isFetching: state.moviesStore.isFetching,
-    movies: state.moviesStore.nowPlayingMovies
+    movies: state.moviesStore.popularMovies
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchNowPlaying: () => dispatch(fetchNowPlaying()),
     fetchPopular: () => dispatch(fetchPopular()),
     dispatch
   }
@@ -47,4 +46,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NowPlaying)
+)(Popular)

@@ -91,9 +91,10 @@ export const receiveMovieDetails = (movie) => {
   }
 }
 
-export const toggleLeftNavigationDrawer = () => {
+export const toggleLeftNavigationDrawer = (force) => {
   return {
-    type: TOGGLE_LEFT_NAVIGATION_DRAWER
+    type: TOGGLE_LEFT_NAVIGATION_DRAWER,
+    force
   }
 }
 
